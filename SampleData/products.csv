@@ -1,0 +1,50 @@
+Product Name,Qty,Price,Category,Variations,Alternative
+Pen,10,0.1,Office Supplies,"Smooth, retractable, fine-tip, gel, ballpoint, refillable, luxury",Pen
+Pencil,10,0.2,Office Supplies,"Retractable, ergonomic, precise, mechanical ",Pencil
+Marker,5,1,Office Supplies,"Permanent , fine-point, waterproof",Marker
+Sticky Notes,5,1,Office Supplies,"Bright, lined, removable, super-adhesive",Notes
+Notepad,10,1.5,Office Supplies,"Legal, spiral-bound, perforated, compact",Note Book
+Printer Paper Large,10,4,Office Supplies,"Recycled, heavyweight, glossy, white",Paper A4
+Printer Paper Small,10,4,Office Supplies,"Recycled, heavyweight, glossy, white",Paper A5
+File Folders,1,3,Office Supplies,"Colored, expanding, tabbed, waterproof",File Storage
+Stapler,1,3,Office Supplies,"Heavy-duty, compact, electric, ergonomic",Stapler
+Desk Organizer,1,3,Office Supplies,"Multi-compartment, mesh, wooden, stackable",Organizer
+Tape Dispenser,1,3,Office Supplies,"Weighted, handheld, sleek, portable",Tape Dispenser
+Correction Tape,10,0.3,Office Supplies,"Smooth, refillable, compact, quick-dry",Correction Tape
+Scissors,1,5.5,Office Supplies,"Stainless steel, ergonomic, heavy-duty",Scissors
+Whiteboard,1,10,Office Supplies,"Magnetic, glass, wall-mounted, portable",White Board
+Planner,1,10,Office Supplies,"Weekly, monthly, hardcover, leather-bound",Planner
+Label Maker,1,6,Office Supplies,"Portable, Bluetooth, thermal, customizable",Labelmaker
+Printer,1,180,Computer Equipment,"Wireless, laser, inkjet, MFC",Office Printer
+Monitor,1,220,Computer Equipment,"Curved, widescreen, 4K",Computer Display
+Keyboard,1,30,Computer Equipment,"Mechanical, ergonomic, wireless",Computer Keyboard
+Mouse,1,45,Computer Equipment,"Optical, ergonomic, silent-click, Bluetooth",Computer Mouse
+Laptop Stand,1,88,Computer Equipment,"Adjustable, portable, aluminum, foldable",Laptop Stand
+Headset,1,120,Computer Equipment,"Noise-canceling, wireless, over-ear, lightweight",Head Set
+Microphone,1,100,Computer Equipment,"Condenser, USB, studio-quality, compact",Microphone
+Docking Station,1,100,Computer Equipment,"Multi-port, USB-C, portable, powered",Docking Station
+Ethernet Cable,10,8,Computer Equipment,"High-speed, flat, braided, shielded",Ethernet Wire
+Surge Protector,1,50,Computer Equipment,"Multi-outlet, USB, heavy-duty, wall-mounted",Surge Protector
+Wireless Charger,1,20,Computer Equipment,"Fast-charging, magnetic, foldable, universal",Wireless Charger
+Projector,1,500,Computer Equipment,"HD, portable, wireless",Projector
+Office Chair,1,450,Furniture,"Ergonomic, leather, mesh, adjustable",Office Chair
+Standing Desk,1,850,Furniture,"Electric, height-adjustable, L-shaped, compact",Standing Desk
+Filing Cabinet,1,200,Furniture,"Lockable, metal, wooden, mobile",Filing Cabinet
+Bookshelf,1,4200,Furniture,"Open-shelving, modern, compact, wooden",Book Storage
+Desk Lamp,1,90,Furniture,"LED, dimmable, adjustable, touch-sensitive",Desk Lamp
+Conference Table,1,5400,Furniture,"Expandable, oval, wooden, sleek",Table 20 seats
+Conference Table,1,12400,Furniture,"Expandable, oval, wooden, sleek",Table 40 seats
+Guest Chair,1,120,Furniture,"Stackable, cushioned, armless, elegant",Guest Chair
+Monitor Arm,1,120,Furniture,"Adjustable, dual-screen, gas-spring, clamp-on",Monitor Arm
+Drawer Organizer,1,50,Furniture,"Expandable, plastic, wooden, multi-compartment",Drawer Organizer
+Wastebasket,1,85,Furniture,"Mesh, compact, pedal-operated, odor-resistant",Waste Basket
+Computer Desk,1,150,Furniture,"Minimalist, wooden, corner, adjustable",Computer Desk
+Desk Mat,1,12,Office Supplies,"Leather, large, waterproof, anti-slip",Desk Mat
+Mouse Pad,1,5,Office Supplies,"Extended, ergonomic, gel-cushioned, RGB",Mouse Pad
+Filing Tray,1,70,Office Supplies,"Stackable, metal, plastic, tiered",Filing Tray
+Presentation Board,1,70,Office Supplies,"Magnetic, foldable, whiteboard, cork",Presentation Board
+Document Scanner,1,120,Computer Equipment,"Wireless, high-speed, duplex, portable",Scanner
+Conference Phone,1,200,Computer Equipment,"VoIP, Bluetooth, multi-microphone, expandable",Meetings Phone
+Laptop Backpack,1,120,Office Supplies,"Waterproof, anti-theft, padded, USB-charging",Backpack
+Air Purifier,1,350,Furniture,"HEPA, quiet, compact",Office Air Purifier
+Office Couch,1,2400,Furniture,"Modern, leather, sectional, compact",Office Coach

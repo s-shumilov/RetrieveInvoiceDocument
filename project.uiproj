@@ -1,0 +1,6 @@
+{
+  "Name": "RetrieveInvoiceDocument",
+  "ProjectType": "Process",
+  "Description": "Automation that retrieves Purchase Order information and Invoice PDF document for matching",
+  "MainFile": "Main.xaml"
+}

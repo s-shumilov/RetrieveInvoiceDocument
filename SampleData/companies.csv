@@ -1,0 +1,29 @@
+Name,Address,Country,Contact Name,Contact Phone,Currency,Tax Code,Tax Name,Tax Rate
+BluePeak Solutions Inc.,"120 Market St, San Francisco, CA",USA,Michael Turner,+1-415-555-0198,USD,US-49218376,VAT,8.25
+NorthRiver Tech LLC,"450 Madison Ave, New York, NY",USA,Angela Brooks,+1-212-555-0172,USD,US-88372914,VAT,8.875
+Horizon Logistics Corp.,"210 W Lake St, Chicago, IL",USA,Daniel Price,+1-312-555-0133,USD,US-66190234,VAT,10.25
+Bucharest Consulting SRL,"Bd. Unirii 20, Bucharest",Romania,Andrei Popescu,+40-21-555-7788,RON,RO-87654321,VAT,19
+Transilvania Systems SRL,"Str. Memorandumului 12, Cluj-Napoca",Romania,Ioana Ionescu,+40-264-555-2211,RON,RO-33445566,VAT,19
+Danube Digital SRL,"Str. Stefan cel Mare 8, Iasi",Romania,Mihai Georgescu,+40-31-555-8899,RON,RO-99887766,VAT,19
+LionCity Tech Pte Ltd,"8 Shenton Way, #15-02, Singapore",Singapore,Kelvin Tan,+65-6123-4567,SGD,SG-202345678Z,GST,8
+Marina Bay Solutions Pte Ltd,"1 Raffles Place, #22-01, Singapore",Singapore,Cheryl Lim,+65-6789-1122,SGD,SG-201998877X,GST,8
+Orchard Data Services Pte Ltd,"50 Orchard Rd, #10-05, Singapore",Singapore,Adrian Koh,+65-6999-3344,SGD,SG-202112233W,GST,8
+Southern Cross IT Pty Ltd,"200 George St, Sydney NSW",Australia,Emily Harris,+61-2-5550-8899,AUD,AU-51726384910,GST,10
+Outback Networks Pty Ltd,"455 Collins St, Melbourne VIC",Australia,Liam OÕConnor,+61-3-5551-2244,AUD,AU-62837491022,GST,10
+HarbourTech Pty Ltd,"88 Eagle St, Brisbane QLD",Australia,Sophie Bennett,+61-7-5552-6677,AUD,AU-73920184566,GST,10
+KiwiCloud Ltd,"120 Queen St, Auckland",New Zealand,James Wilson,+64-9-555-4433,NZD,NZ-9429038475612,GST,15
+Southern Data Ltd,"45 Cashel St, Christchurch",New Zealand,Hannah Clark,+64-3-555-7788,NZD,NZ-9429035566778,GST,15
+Pacific Edge Solutions Ltd,"10 Willis St, Wellington",New Zealand,Oliver Smith,+64-4-555-9900,NZD,NZ-9429039988123,GST,15
+RheinTech GmbH,"Friedrichstrasse 100, Berlin",Germany,Lukas Schneider,+49-30-555-2211,EUR,DE-998877665,VAT,19
+Bavaria Systems GmbH,"Leopoldstrasse 45, Munich",Germany,Anna MŸller,+49-89-555-3344,EUR,DE-112233445,VAT,19
+Hanseatic Solutions GmbH,"Speicherstadt 8, Hamburg",Germany,Jonas Fischer,+49-40-555-6677,EUR,DE-556677889,VAT,19
+Straits Digital Pte Ltd,"6 Battery Rd, #18-01, Singapore",Singapore,Marcus Lee,+65-6221-7788,SGD,SG-202334455K,GST,8
+Meridian Cloud Pte Ltd,"80 Robinson Rd, #12-03, Singapore",Singapore,Jasmine Ng,+65-6333-2244,SGD,SG-201776655N,GST,8
+Apex Automation Pte Ltd,"10 Anson Rd, #21-07, Singapore",Singapore,Darren Chua,+65-6455-9900,SGD,SG-202556677M,GST,8
+EastGate Solutions Pte Ltd,"3 Temasek Ave, #14-02, Singapore",Singapore,Rachel Ong,+65-6777-1122,SGD,SG-201889900P,GST,8
+NovaTech Systems Pte Ltd,"12 Marina View, #09-05, Singapore",Singapore,Benjamin Teo,+65-6888-5566,SGD,SG-202778899R,GST,8
+Carpathian Tech SRL,"Str. Victoriei 25, Bucharest",Romania,Vlad Dumitrescu,+40-21-666-3344,RON,RO-44556677,VAT,19
+Moldavia Software SRL,"Str. Palas 10, Iasi",Romania,Elena Stan,+40-232-555-8899,RON,RO-22334455,VAT,19
+Dacia Networks SRL,"Str. Libertatii 5, Brasov",Romania,Florin Petrescu,+40-31-444-1122,RON,RO-77889900,VAT,19
+Banat IT Services SRL,"Bd. Republicii 18, Timisoara",Romania,Cristina Pavel,+40-256-555-7788,RON,RO-55664433,VAT,19
+Dobrogea Solutions SRL,"Str. Stefan cel Mare 30, Constanta",Romania,Sorin Marinescu,+40-241-555-2211,RON,RO-66778899,VAT,19
