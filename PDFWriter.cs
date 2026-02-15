@@ -58,7 +58,7 @@ public class PDFWriter : RetrieveInvoiceDocument.CodedWorkflow
                 .Add(new Paragraph(invoice.Seller.Name) 
                 .SetFontColor(ColorConstants.WHITE) 
                 .SetFont(boldFont)) 
-                .SetFontSize(22)
+                .SetFontSize(20)
                 .SetPadding(25)
                 .SetBorder(Border.NO_BORDER) 
                 .SetTextAlignment(TextAlignment.LEFT) 
@@ -69,7 +69,7 @@ public class PDFWriter : RetrieveInvoiceDocument.CodedWorkflow
                 .Add(new Paragraph($"Invoice #: {invoice.InvoiceNumber}") 
                 .SetFontColor(ColorConstants.WHITE) 
                 .SetFont(boldFont)) 
-                .SetFontSize(16)
+                .SetFontSize(14)
                 .SetPadding(20)
                 .SetBorder(Border.NO_BORDER) .SetTextAlignment(TextAlignment.RIGHT) 
                 .SetBackgroundColor(invoiceColor);  
@@ -174,8 +174,8 @@ public class PDFWriter : RetrieveInvoiceDocument.CodedWorkflow
                 .SetPaddingRight(20));
 
             // Notes Section
-            document.Add(new Paragraph("Notes:").SetFontSize(12).SetPaddingLeft(20).SetPaddingTop(80));
-            document.Add(new Paragraph(invoice.Notes).SetPaddingLeft(20));
+            document.Add(new Paragraph("Notes:").SetFontSize(12).SetPaddingLeft(20).SetPaddingTop(40));
+            document.Add(new Paragraph(invoice.Notes).SetPaddingLeft(60));
             
             Table footerTable = new Table(2) 
                 .UseAllAvailableWidth() 

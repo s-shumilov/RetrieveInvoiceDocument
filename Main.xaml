@@ -229,7 +229,7 @@
       <AssemblyReference>RetrieveInvoiceDocument.Core</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main2" sap:VirtualizedContainerService.HintSize="2622,793.6566666666666" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main" sap:VirtualizedContainerService.HintSize="2224.714285714286,777.9423809523809" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="POID" />
       <Variable x:TypeArguments="x:String" Name="InvoiceID" />
@@ -240,19 +240,19 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;Starting normal execution with mismatch chance: &quot; + in_FailureProbability.ToString+&quot;)]&quot;]">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="450.2857142857143,48" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;Starting normal execution with mismatch chance: &quot; + in_FailureProbability.ToString+&quot;)]&quot;]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:LogMessage>
-    <Assign sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign sap:VirtualizedContainerService.HintSize="450.2857142857143,48" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[InvoiceID]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[DateTime.Now.ToString("yyMMddHHmmss") + New Random().Next(10, 99).ToString()]</InArgument>
+        <InArgument x:TypeArguments="x:String">[DateTime.Now.ToString("ddHHmm") &amp; New Random().Next(10, 99).ToString()]</InArgument>
       </Assign.Value>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -260,12 +260,12 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <Assign sap:VirtualizedContainerService.HintSize="450.2857142857143,48" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[POID]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[DateTime.Now.ToString("yyMMddHHmmss") + New Random().Next(10, 99).ToString()]</InArgument>
+        <InArgument x:TypeArguments="x:String">[DateTime.Now.ToString("HHMMmm") &amp; New Random().Next(10, 99).ToString()]</InArgument>
       </Assign.Value>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -273,7 +273,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="MaxLineItemsQuantity" CacheStrategy="None" DisplayName="Get Max PO Lines Count" FolderPath="2-Way Matching" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
+    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="MaxLineItemsQuantity" CacheStrategy="None" DisplayName="Get Max PO Lines Count" FolderPath="2-Way Matching" sap:VirtualizedContainerService.HintSize="450.2857142857143,48" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
       <ui:GetRobotAsset.Value>
         <OutArgument x:TypeArguments="x:Int32">[po_lines_count]</OutArgument>
       </ui:GetRobotAsset.Value>
@@ -283,7 +283,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:GetRobotAsset>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="GenerateJSONs - Invoke Workflow File (GenerateJSONs.cs)" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="GenerateJSONs.cs">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="GenerateJSONs - Invoke Workflow File (GenerateJSONs.cs)" sap:VirtualizedContainerService.HintSize="450.2857142857143,48" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="GenerateJSONs.cs">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:Int32" x:Key="in_LinesQuantity">[po_lines_count]</InArgument>
         <InArgument x:TypeArguments="x:Int32" x:Key="in_FailureProbability">[in_FailureProbability]</InArgument>
@@ -296,7 +296,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="PDFWriter - Invoke Workflow File (PDFWriter.cs)" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="PDFWriter.cs">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="PDFWriter - Invoke Workflow File (PDFWriter.cs)" sap:VirtualizedContainerService.HintSize="450.2857142857143,48" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="PDFWriter.cs">
       <ui:InvokeWorkflowFile.Arguments>
         <scg:Dictionary x:TypeArguments="x:String, Argument" />
       </ui:InvokeWorkflowFile.Arguments>
@@ -306,14 +306,14 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <ucas:UploadStorageFile Path="{x:Null}" TimeoutMS="{x:Null}" Destination="[&quot;Inv-&quot;+ InvoiceID + &quot;.pdf&quot;]" DisplayName="Upload Storage File" FileResource="[LocalResource.FromPath(&quot;invoice-generated.pdf&quot;)]" FolderPath="2-Way Matching" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="UploadStorageFile_1" StorageBucketName="InvoicesStorage">
+    <ucas:UploadStorageFile Path="{x:Null}" TimeoutMS="{x:Null}" Destination="[&quot;Inv-&quot;+ InvoiceID + &quot;.pdf&quot;]" DisplayName="Upload Storage File" FileResource="[LocalResource.FromPath(&quot;invoice-generated.pdf&quot;)]" FolderPath="2-Way Matching" sap:VirtualizedContainerService.HintSize="450.2857142857143,48" sap2010:WorkflowViewState.IdRef="UploadStorageFile_1" StorageBucketName="InvoicesStorage">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ucas:UploadStorageFile>
-    <Assign sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="Assign_3">
+    <Assign sap:VirtualizedContainerService.HintSize="450.2857142857143,48" sap2010:WorkflowViewState.IdRef="Assign_3">
       <Assign.To>
         <OutArgument x:TypeArguments="upr:IResource">[out_InvoicePDF]</OutArgument>
       </Assign.To>

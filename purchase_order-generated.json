@@ -1,0 +1,76 @@
+{
+  "PONumber": "PO-11024384",
+  "PODate": "2026-02-04",
+  "currency": "RON",
+  "seller": {
+    "name": "Dacia Networks SRL",
+    "address": "Str. Libertatii 5, Brasov",
+    "country": "Romania",
+    "taxCode": "RO-77889900",
+    "ContactName": "Florin Petrescu",
+    "ContactPhone": "+40-31-444-1122"
+  },
+  "buyer": {
+    "name": "Marina Bay Solutions Pte Ltd",
+    "address": "1 Raffles Place, #22-01, Singapore",
+    "country": "Singapore",
+    "taxCode": "SG-201998877X",
+    "ContactName": "Cheryl Lim",
+    "ContactPhone": "+65-6789-1122"
+  },
+  "items": [
+    {
+      "description": "Computer Desk",
+      "quantity": 1,
+      "unitPrice": 150.0,
+      "lineTotal": 150.0
+    },
+    {
+      "description": "Conference Table",
+      "quantity": 1,
+      "unitPrice": 12400.0,
+      "lineTotal": 12400.0
+    },
+    {
+      "description": "Mouse Pad",
+      "quantity": 1,
+      "unitPrice": 5.0,
+      "lineTotal": 5.0
+    },
+    {
+      "description": "Air Purifier",
+      "quantity": 1,
+      "unitPrice": 350.0,
+      "lineTotal": 350.0
+    },
+    {
+      "description": "Stapler",
+      "quantity": 1,
+      "unitPrice": 3.0,
+      "lineTotal": 3.0
+    },
+    {
+      "description": "Marker",
+      "quantity": 5,
+      "unitPrice": 1.0,
+      "lineTotal": 5.0
+    },
+    {
+      "description": "Docking Station",
+      "quantity": 1,
+      "unitPrice": 100.0,
+      "lineTotal": 100.0
+    },
+    {
+      "description": "Printer Paper Small",
+      "quantity": 1,
+      "unitPrice": 4.0,
+      "lineTotal": 4.0
+    }
+  ],
+  "subtotal": 13017.0,
+  "taxTotal": 2473.23,
+  "taxName": "VAT 19%",
+  "total": 15490.23,
+  "notes": "Please confirm receipt and delivery date."
+}
