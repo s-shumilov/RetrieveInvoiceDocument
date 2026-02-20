@@ -255,7 +255,7 @@ namespace RetrieveInvoiceDocument
             foreach (var product in selectedProducts)
             {
                 // Random quantity between 1 and available qty
-                int quantity = random.Next(1, product.Qty + 1);
+                int quantity = random.Next(1, 3) * product.Qty;
 
                 lineItems.Add(new LineItemData
                 {
@@ -265,7 +265,9 @@ namespace RetrieveInvoiceDocument
                 });
             }
 
+            // no modifications or failures yet
             return lineItems;
+            
         }
 
         /// <summary>
@@ -286,7 +288,7 @@ namespace RetrieveInvoiceDocument
             var invoiceItems = new List<InvoiceItem>();
             decimal subtotal = 0;
 
-            // First pass: add all normal line items with variations
+            // First pass: add all normal line items with slight description variations
             foreach (var lineItem in lineItems)
             {
                 var product = lineItem.Product;
@@ -298,7 +300,6 @@ namespace RetrieveInvoiceDocument
 
                 // Add one random variation as adjective
                 string variation = product.Variations[random.Next(product.Variations.Count)];
-                //string description = $"{variation.First().ToString().ToUpper() + variation.Substring(1)} {productName}";
                 
                 string description = random.Next(4) == 0
                     ? $"{variation.First().ToString().ToUpper() + variation.Substring(1)} {productName}"
@@ -324,6 +325,9 @@ namespace RetrieveInvoiceDocument
             }
 
             Log($"Failure probability is {failureProbability}");
+            
+            System.IO.File.WriteAllText("invoice-color.txt", "darkgreen");
+
 
             if (failureProbability > 0 && random.Next(100) < failureProbability)
             {
@@ -350,6 +354,7 @@ namespace RetrieveInvoiceDocument
 
                         subtotal += extraLineTotal;
                         Log($"[DISCREPANCY] Added extra line item: {extraDescription} (Qty: {extraQty})");
+                        System.IO.File.WriteAllText("invoice-color.txt", "darkred");
                         break;
 
                     case 1: // Split line into 2 (only if quantity > 1)
@@ -372,21 +377,22 @@ namespace RetrieveInvoiceDocument
                             invoiceItems.RemoveAt(originalIndex);
                             invoiceItems.Insert(originalIndex, new InvoiceItem
                             {
-                                Description = itemToSplit.Description,
+                                Description = $"{itemToSplit.Description} (ship in May)",
                                 Quantity = split1Qty,
                                 UnitPrice = itemToSplit.UnitPrice,
                                 LineTotal = split1Total
                             });
                             invoiceItems.Insert(originalIndex + 1, new InvoiceItem
                             {
-                                Description = itemToSplit.Description,
+                                Description = $"{itemToSplit.Description} (ship in June)",
                                 Quantity = split2Qty,
                                 UnitPrice = itemToSplit.UnitPrice,
                                 LineTotal = split2Total
                             });
 
                             subtotal += split1Total + split2Total;
-                            Log($"[DISCREPANCY] Split line item: {itemToSplit.Description} (Qty: {split1Qty} + {split2Qty})");
+                            Log($"[ACCEPTABLE] Split line item: {itemToSplit.Description} (Qty: {split1Qty} + {split2Qty})");
+                            System.IO.File.WriteAllText("invoice-color.txt", "darksalmon");
                         }
                         break;
 
@@ -414,6 +420,7 @@ namespace RetrieveInvoiceDocument
                             subtotal += newLineTotal;
                             decimal pricePercent = (priceChange - 1) * 100;
                             Log($"[DISCREPANCY] Price changed for {itemToChange.Description}: {itemToChange.UnitPrice} -> {newPrice} ({pricePercent:+0.0;-0.0}%)");
+                            System.IO.File.WriteAllText("invoice-color.txt", "darkred");
                         }
                         break;
                 }

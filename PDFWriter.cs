@@ -45,39 +45,41 @@ public class PDFWriter : RetrieveInvoiceDocument.CodedWorkflow
             document.SetMargins(0, 0, 0, 0); 
             
             PdfFont boldFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
-            DeviceRgb invoiceColor = new DeviceRgb(0, 100, 50);  
             
-            
-            // Create a 2-column table for the header 
-            Table headerTable = new Table(2) 
-                .UseAllAvailableWidth() 
-                .SetHeight(80)
-                .SetBackgroundColor(invoiceColor);    
-            
-            // Seller name (left-aligned, white font) 
-            Cell leftHeader = new Cell() 
-                .Add(new Paragraph(invoice.Seller.Name) 
-                .SetFontColor(ColorConstants.WHITE) 
-                .SetFont(boldFont)) 
-                .SetFontSize(20)
-                .SetPadding(25)
-                .SetBorder(Border.NO_BORDER) 
-                .SetTextAlignment(TextAlignment.LEFT) 
-                .SetBackgroundColor(invoiceColor);  
-            
-            // Invoice number (right-aligned, white font) 
-            Cell rightHeader = new Cell() 
-                .Add(new Paragraph($"Invoice #: {invoice.InvoiceNumber}") 
-                .SetFontColor(ColorConstants.WHITE) 
-                .SetFont(boldFont)) 
-                .SetFontSize(14)
-                .SetPadding(20)
-                .SetBorder(Border.NO_BORDER) .SetTextAlignment(TextAlignment.RIGHT) 
-                .SetBackgroundColor(invoiceColor);  
-            
-            // Add cells to table 
-            headerTable.AddCell(leftHeader); 
-            headerTable.AddCell(rightHeader); 
+                string invoiceColorText = System.IO.File.ReadAllText("invoice-color.txt");
+                Color invoiceColor = WebColors.GetRGBColor(invoiceColorText);
+
+
+                // Create a 2-column table for the header 
+                Table headerTable = new Table(2)
+                    .UseAllAvailableWidth()
+                    .SetHeight(80)
+                    .SetBackgroundColor(invoiceColor);
+
+                // Seller name (left-aligned, white font) 
+                Cell leftHeader = new Cell()
+                    .Add(new Paragraph(invoice.Seller.Name)
+                    .SetFontColor(ColorConstants.WHITE)
+                    .SetFont(boldFont))
+                    .SetFontSize(20)
+                    .SetPadding(25)
+                    .SetBorder(Border.NO_BORDER)
+                    .SetTextAlignment(TextAlignment.LEFT)
+                    .SetBackgroundColor(invoiceColor);
+
+                // Invoice number (right-aligned, white font) 
+                Cell rightHeader = new Cell()
+                    .Add(new Paragraph($"Invoice #: {invoice.InvoiceNumber}")
+                    .SetFontColor(ColorConstants.WHITE)
+                    .SetFont(boldFont))
+                    .SetFontSize(14)
+                    .SetPadding(20)
+                    .SetBorder(Border.NO_BORDER).SetTextAlignment(TextAlignment.RIGHT)
+                    .SetBackgroundColor(invoiceColor);
+
+                // Add cells to table 
+                headerTable.AddCell(leftHeader);
+                headerTable.AddCell(rightHeader); 
             
             // Add header to document 
             document.Add(headerTable);                        

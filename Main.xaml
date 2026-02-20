@@ -231,14 +231,14 @@
       <AssemblyReference>System.Net.Ping</AssemblyReference>
       <AssemblyReference>System.Net.Sockets</AssemblyReference>
       <AssemblyReference>UiPath.CodedWorkflows</AssemblyReference>
-      <AssemblyReference>RetrieveInvoiceDocument.Core</AssemblyReference>
       <AssemblyReference>netstandard</AssemblyReference>
       <AssemblyReference>UiPath.DataService.Activities.Core</AssemblyReference>
       <AssemblyReference>UiPath.DataService.Definition</AssemblyReference>
       <AssemblyReference>DataService.RetrieveInvoiceDocument</AssemblyReference>
+      <AssemblyReference>RetrieveInvoiceDocument.Core</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main" sap:VirtualizedContainerService.HintSize="1137,755.6566666666666" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main" sap:VirtualizedContainerService.HintSize="1455,861.6566666666666" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="InvoiceFileName" />
       <Variable x:TypeArguments="x:String" Name="POID" />
@@ -370,7 +370,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:RenameFileX>
-    <ucas:UploadStorageFile Path="{x:Null}" TimeoutMS="{x:Null}" Destination="[&quot;INV-&quot;+ InvoiceID + &quot;.pdf&quot;]" DisplayName="Upload Storage File" FileResource="[InvoiceFileResource]" FolderPath="2-Way Matching" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="UploadStorageFile_1" StorageBucketName="InvoicesStorage">
+    <ucas:UploadStorageFile Path="{x:Null}" TimeoutMS="{x:Null}" Destination="[&quot;INV-&quot;+ InvoiceID + &quot;.pdf&quot;]" DisplayName="Upload Storage File" FileResource="[InvoiceFileResource]" FolderPath="2-Way Matching IXP" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="UploadStorageFile_1" StorageBucketName="InvoicesStorage">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
