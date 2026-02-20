@@ -7,14 +7,20 @@
     "itext7": "[9.5.0]",
     "itext7.bouncy-castle-adapter": "[9.5.0]",
     "itext7.commons": "[9.5.0]",
+    "UiPath.DataService.Activities": "[25.9.3]",
     "UiPath.Excel.Activities": "[3.3.1]",
     "UiPath.System.Activities": "[25.12.2]"
   },
   "webServices": [],
-  "entitiesStores": [],
+  "entitiesStores": [
+    {
+      "serviceDocument": ".entities/EntitiesStore.json",
+      "namespace": "RetrieveInvoiceDocument"
+    }
+  ],
   "schemaVersion": "4.0",
   "studioVersion": "26.0.185.0",
-  "projectVersion": "1.0.3",
+  "projectVersion": "1.0.8",
   "runtimeOptions": {
     "autoDispose": false,
     "netFrameworkLazyLoading": false,

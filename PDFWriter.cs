@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Text.Json;
 using System.Collections.Generic;
+using System.Globalization;
 using UiPath.CodedWorkflows;
 using iText.Kernel.Pdf;
 using iText.Layout;
@@ -145,29 +146,32 @@ public class PDFWriter : RetrieveInvoiceDocument.CodedWorkflow
             linesTable.AddHeaderCell(new Cell().Add(new Paragraph("Description")).SetWidth(UnitValue.CreatePercentValue(50)).SetBackgroundColor(invoiceColor).SetTextAlignment(TextAlignment.CENTER).SetPadding(5).SetFontColor(ColorConstants.WHITE));
             linesTable.AddHeaderCell(new Cell().Add(new Paragraph("Qty")).SetBackgroundColor(invoiceColor).SetTextAlignment(TextAlignment.CENTER).SetPadding(5).SetFontColor(ColorConstants.WHITE));
             linesTable.AddHeaderCell(new Cell().Add(new Paragraph("Unit Price")).SetBackgroundColor(invoiceColor).SetTextAlignment(TextAlignment.CENTER).SetPadding(5).SetFontColor(ColorConstants.WHITE));
-            linesTable.AddHeaderCell(new Cell().Add(new Paragraph("Total")).SetBackgroundColor(invoiceColor).SetTextAlignment(TextAlignment.CENTER).SetPadding(5).SetFontColor(ColorConstants.WHITE));
+            linesTable.AddHeaderCell(new Cell().Add(new Paragraph($"Total ({invoice.Currency})")).SetBackgroundColor(invoiceColor).SetTextAlignment(TextAlignment.CENTER).SetPadding(5).SetFontColor(ColorConstants.WHITE));
+
+            // Determine culture for formatting
+            var culture = GetCultureInfo(invoice?.Seller?.Country);
 
             // Table rows
             foreach (var item in invoice.Items)
             {
                 linesTable.AddCell(new Cell().Add(new Paragraph(item.Description)).SetPadding(5));
                 linesTable.AddCell(new Cell().Add(new Paragraph(item.Quantity.ToString())).SetPadding(5).SetTextAlignment(TextAlignment.CENTER));
-                linesTable.AddCell(new Cell().Add(new Paragraph($"{item.UnitPrice}")).SetPadding(5).SetTextAlignment(TextAlignment.RIGHT));
-                linesTable.AddCell(new Cell().Add(new Paragraph($"{item.LineTotal}")).SetPadding(5).SetTextAlignment(TextAlignment.RIGHT));
+                linesTable.AddCell(new Cell().Add(new Paragraph($"{item.UnitPrice.ToString("C", culture)}")).SetPadding(5).SetTextAlignment(TextAlignment.RIGHT));
+                linesTable.AddCell(new Cell().Add(new Paragraph($"{item.LineTotal.ToString("C", culture)}")).SetPadding(5).SetTextAlignment(TextAlignment.RIGHT));
             }
 
             document.Add(linesTable);
 
             // Totals Section
-            document.Add(new Paragraph($"Subtotal: {invoice.Subtotal}")
+            document.Add(new Paragraph($"Subtotal: {invoice.Subtotal.ToString("C", culture)}")
                 .SetTextAlignment(TextAlignment.RIGHT)
                 .SetPaddingRight(20));
             
-            document.Add(new Paragraph($"Tax ({invoice.TaxName}): {invoice.TaxTotal}")
+            document.Add(new Paragraph($"{invoice.TaxName}: {invoice.TaxTotal.ToString("C", culture)}")
                 .SetTextAlignment(TextAlignment.RIGHT)
                 .SetPaddingRight(20));
             
-            document.Add(new Paragraph($"Total: {invoice.Total}")
+            document.Add(new Paragraph($"Total ({invoice.Currency}): {invoice.Total.ToString("C", culture)}")
                 .SetFontSize(14)
                 .SetFont(boldFont)
                 .SetTextAlignment(TextAlignment.RIGHT)
@@ -189,6 +193,32 @@ public class PDFWriter : RetrieveInvoiceDocument.CodedWorkflow
         }
         
         Console.WriteLine("Invoice PDF generated successfully.");
+    }
+
+    private static CultureInfo GetCultureInfo(string country)
+    {
+        var map = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            {"USA", "en-US"},
+            {"United States", "en-US"},
+            {"United States of America", "en-US"},
+            {"US", "en-US"},
+            {"Singapore", "en-SG"},
+            {"Australia", "en-AU"},
+            {"New Zealand", "en-NZ"},
+            {"Romania", "ro-RO"},
+            {"Germany", "de-DE"},
+            {"Deutschland", "de-DE"}
+        };
+
+        if (string.IsNullOrWhiteSpace(country))
+            return new CultureInfo("en-US");
+
+        var key = country.Trim();
+        if (map.TryGetValue(key, out var cultureName))
+            return new CultureInfo(cultureName);
+
+        return new CultureInfo("en-US");
     }
 
 }

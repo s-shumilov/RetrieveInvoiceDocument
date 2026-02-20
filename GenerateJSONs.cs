@@ -7,6 +7,26 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UiPath.CodedWorkflows;
 
+
+/*
+
+Formats country specific
+USA → +1 (AAA) XXX-XXXX
+Singapore → +65 XXXX XXXX
+Australia → +61 X XXXX XXXX
+New Zealand → +64 X XXX XXXX
+Romania → +40 7XX XXX XXX (mobile-style format)
+Germany → +49 (0)XX XXXX XXXX
+
+Cultures
+USA → en-US
+Singapore → en-SG
+Australia → en-AU
+New Zealand → en-NZ
+Romania → ro-RO
+Germany → de-DE
+*/
+
 namespace RetrieveInvoiceDocument
 {
     // Data model for vendors

@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main2" this:Main2.in_FailureProbability="70" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ucas="clr-namespace:UiPath.Core.Activities.Storage;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:upr="clr-namespace:UiPath.Platform.ResourceHandling;assembly=UiPath.Platform" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main2" this:Main2.in_FailureProbability="70" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:r="clr-namespace:RetrieveInvoiceDocument;assembly=DataService.RetrieveInvoiceDocument" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ucas="clr-namespace:UiPath.Core.Activities.Storage;assembly=UiPath.System.Activities" xmlns:uda="clr-namespace:UiPath.DataService.Activities;assembly=UiPath.DataService.Activities.Core" xmlns:udam="clr-namespace:UiPath.DataService.Activities.Models;assembly=UiPath.DataService.Activities.Core" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:upr="clr-namespace:UiPath.Platform.ResourceHandling;assembly=UiPath.Platform" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="out_InvoicePDF" Type="OutArgument(upr:IResource)" />
     <x:Property Name="out_InvoiceFileName" Type="OutArgument(x:String)" />
@@ -119,6 +119,11 @@
       <x:String>System.Net.Security</x:String>
       <x:String>System.Net.Sockets</x:String>
       <x:String>UiPath.Platform</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.DataService.Activities</x:String>
+      <x:String>UiPath.DataService.Definition</x:String>
+      <x:String>UiPath.DataService.Activities.Models</x:String>
+      <x:String>RetrieveInvoiceDocument</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -227,27 +232,34 @@
       <AssemblyReference>System.Net.Sockets</AssemblyReference>
       <AssemblyReference>UiPath.CodedWorkflows</AssemblyReference>
       <AssemblyReference>RetrieveInvoiceDocument.Core</AssemblyReference>
+      <AssemblyReference>netstandard</AssemblyReference>
+      <AssemblyReference>UiPath.DataService.Activities.Core</AssemblyReference>
+      <AssemblyReference>UiPath.DataService.Definition</AssemblyReference>
+      <AssemblyReference>DataService.RetrieveInvoiceDocument</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main" sap:VirtualizedContainerService.HintSize="2224.714285714286,777.9423809523809" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main" sap:VirtualizedContainerService.HintSize="1137,755.6566666666666" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="InvoiceFileName" />
       <Variable x:TypeArguments="x:String" Name="POID" />
       <Variable x:TypeArguments="x:String" Name="InvoiceID" />
       <Variable x:TypeArguments="x:Int32" Name="po_lines_count" />
+      <Variable x:TypeArguments="upr:IResource" Name="InvoiceFileResource" />
+      <Variable x:TypeArguments="x:String" Name="PODATA" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="450.2857142857143,48" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;Starting normal execution with mismatch chance: &quot; + in_FailureProbability.ToString+&quot;)]&quot;]">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;Starting normal execution with mismatch chance: &quot; + in_FailureProbability.ToString+&quot;)]&quot;]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:LogMessage>
-    <Assign sap:VirtualizedContainerService.HintSize="450.2857142857143,48" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[InvoiceID]</OutArgument>
       </Assign.To>
@@ -260,7 +272,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="450.2857142857143,48" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <Assign sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[POID]</OutArgument>
       </Assign.To>
@@ -273,7 +285,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="MaxLineItemsQuantity" CacheStrategy="None" DisplayName="Get Max PO Lines Count" FolderPath="2-Way Matching" sap:VirtualizedContainerService.HintSize="450.2857142857143,48" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
+    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="MaxLineItemsQuantity" CacheStrategy="None" DisplayName="Get Max PO Lines Count" FolderPath="2-Way Matching" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
       <ui:GetRobotAsset.Value>
         <OutArgument x:TypeArguments="x:Int32">[po_lines_count]</OutArgument>
       </ui:GetRobotAsset.Value>
@@ -283,7 +295,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:GetRobotAsset>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="GenerateJSONs - Invoke Workflow File (GenerateJSONs.cs)" sap:VirtualizedContainerService.HintSize="450.2857142857143,48" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="GenerateJSONs.cs">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="GenerateJSONs - Invoke Workflow File (GenerateJSONs.cs)" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="GenerateJSONs.cs">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:Int32" x:Key="in_LinesQuantity">[po_lines_count]</InArgument>
         <InArgument x:TypeArguments="x:Int32" x:Key="in_FailureProbability">[in_FailureProbability]</InArgument>
@@ -296,7 +308,39 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="PDFWriter - Invoke Workflow File (PDFWriter.cs)" sap:VirtualizedContainerService.HintSize="450.2857142857143,48" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="PDFWriter.cs">
+    <ui:ReadTextFile File="{x:Null}" Content="[PODATA]" DisplayName="Read Text File" FileName="purchase_order-generated.json" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="ReadTextFile_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:ReadTextFile>
+    <uda:CreateEntityRecord x:TypeArguments="r:PurchaseOrdersDatabase" InputEntity="{x:Null}" IsInRecordView="{x:Null}" OutputEntity="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Create Entity Record" EntityId="47003d67-3e0d-f111-832f-0022489d7f69" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="CreateEntityRecord`1_1" InputEntityInFieldView="[new RetrieveInvoiceDocument.PurchaseOrdersDatabase() With {  .PODATA = PODATA,  .POID = &quot;PO-&quot;+POID }]" TimeoutInMs="30000">
+      <uda:CreateEntityRecord.State>
+        <udam:RecordState RequiredFieldCount="2">
+          <udam:RecordState.SelectedFields>
+            <scg:List x:TypeArguments="udam:DynamicEntityField" Capacity="2">
+              <udam:DynamicEntityField Id="52003d67-3e0d-f111-832f-0022489d7f69" IsRequired="True" Name="PODATA">
+                <udam:DynamicEntityField.ArgumentValue>
+                  <InArgument x:TypeArguments="x:String">[PODATA]</InArgument>
+                </udam:DynamicEntityField.ArgumentValue>
+              </udam:DynamicEntityField>
+              <udam:DynamicEntityField Id="51003d67-3e0d-f111-832f-0022489d7f69" IsRequired="True" Name="POID">
+                <udam:DynamicEntityField.ArgumentValue>
+                  <InArgument x:TypeArguments="x:String">["PO-"+POID]</InArgument>
+                </udam:DynamicEntityField.ArgumentValue>
+              </udam:DynamicEntityField>
+            </scg:List>
+          </udam:RecordState.SelectedFields>
+        </udam:RecordState>
+      </uda:CreateEntityRecord.State>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </uda:CreateEntityRecord>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="PDFWriter - Invoke Workflow File (PDFWriter.cs)" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="PDFWriter.cs">
       <ui:InvokeWorkflowFile.Arguments>
         <scg:Dictionary x:TypeArguments="x:String, Argument" />
       </ui:InvokeWorkflowFile.Arguments>
@@ -306,19 +350,52 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <ucas:UploadStorageFile Path="{x:Null}" TimeoutMS="{x:Null}" Destination="[&quot;Inv-&quot;+ InvoiceID + &quot;.pdf&quot;]" DisplayName="Upload Storage File" FileResource="[LocalResource.FromPath(&quot;invoice-generated.pdf&quot;)]" FolderPath="2-Way Matching" sap:VirtualizedContainerService.HintSize="450.2857142857143,48" sap2010:WorkflowViewState.IdRef="UploadStorageFile_1" StorageBucketName="InvoicesStorage">
+    <Assign sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="Assign_4">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[InvoiceFileName]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">["Inv-"+ InvoiceID + ".pdf"]</InArgument>
+      </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </Assign>
+    <ui:RenameFileX FileResource="{x:Null}" DisplayName="Rename File" FilePath="invoice-generated.pdf" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="RenameFileX_1" KeepExtension="True" NewName="[&quot;INV-&quot;+ InvoiceID + &quot;.pdf&quot;]" OutputFileResource="[InvoiceFileResource]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:RenameFileX>
+    <ucas:UploadStorageFile Path="{x:Null}" TimeoutMS="{x:Null}" Destination="[&quot;INV-&quot;+ InvoiceID + &quot;.pdf&quot;]" DisplayName="Upload Storage File" FileResource="[InvoiceFileResource]" FolderPath="2-Way Matching" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="UploadStorageFile_1" StorageBucketName="InvoicesStorage">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ucas:UploadStorageFile>
-    <Assign sap:VirtualizedContainerService.HintSize="450.2857142857143,48" sap2010:WorkflowViewState.IdRef="Assign_3">
+    <Assign sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="Assign_3">
       <Assign.To>
         <OutArgument x:TypeArguments="upr:IResource">[out_InvoicePDF]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="upr:ILocalResource">[LocalResource.FromPath("invoice-generated.pdf")]</InArgument>
+        <InArgument x:TypeArguments="upr:IResource">[InvoiceFileResource]</InArgument>
+      </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="Assign_5">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_InvoiceFileName]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">["INV-"+ InvoiceID + ".pdf"]</InArgument>
       </Assign.Value>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
