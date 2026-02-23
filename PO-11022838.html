@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Order PO-11022838</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
+        }
+
+        .header-title h1 {
+            font-size: 32px;
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .header-title p {
+            font-size: 14px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .po-info {
+            text-align: right;
+        }
+
+        .po-info div {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .po-info .label {
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .po-info .value {
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .addresses {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .address-block {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+        }
+
+        .address-block h3 {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #7f8c8d;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .address-block p {
+            font-size: 14px;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .address-block .label {
+            color: #7f8c8d;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .items-section {
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        thead {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        thead th {
+            padding: 15px;
+            text-align: left;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        tbody td {
+            padding: 15px;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 14px;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: 2px solid #2c3e50;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .totals {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 30px;
+        }
+
+        .totals-box {
+            width: 300px;
+            background-color: #f8f9fa;
+            border: 1px solid #ecf0f1;
+            border-radius: 4px;
+            padding: 0;
+        }
+
+        .totals-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 20px;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 14px;
+        }
+
+        .totals-row:last-child {
+            border-bottom: none;
+        }
+
+        .totals-row.subtotal .label {
+            color: #7f8c8d;
+        }
+
+        .totals-row.tax {
+            background-color: #fff3cd;
+        }
+
+        .totals-row.tax .label {
+            color: #856404;
+            font-weight: 500;
+        }
+
+        .totals-row.total {
+            background-color: #2c3e50;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .totals-row .label {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .totals-row .value {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .totals-row.total .value {
+            color: white;
+        }
+
+        .notes-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+        }
+
+        .notes-section h4 {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #7f8c8d;
+            font-weight: 600;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .notes-section p {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 12px;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-title">
+                <h1>Purchase Order</h1>
+                <p>Original Document</p>
+            </div>
+            <div class="po-info">
+                <div>
+                    <span class="label">Purchase Order Number:</span>
+                    <div class="value">PO-11022838</div>
+                </div>
+                <div>
+                    <span class="label">Purchase Order Date:</span>
+                    <div class="value">February 20, 2026</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="addresses">
+            <div class="address-block">
+                <h3>From</h3>
+                <p><strong>Straits Digital Pte Ltd</strong></p>
+                <p>6 Battery Rd, #18-01, Singapore 049909 Singapore</p>
+                <p style="margin-top: 12px;">
+                    <span class="label">Tax Code:</span> SG-202334455K
+                </p>
+                <p style="margin-top: 6px;">
+                    <span class="label">Attention:</span> Marcus Lee<br>
+                    <span class="label">Phone:</span> +65 8344 3944
+                </p>
+            </div>
+            <div class="address-block">
+                <h3>To (Buyer)</h3>
+                <p><strong>Southern Data Ltd</strong></p>
+                <p>45 Cashel St, Christchurch 8011</p>
+                <p>New Zealand</p>
+                <p style="margin-top: 12px;">
+                    <span class="label">Tax Code:</span> NZ-9429035566778
+                </p>
+                <p style="margin-top: 6px;">
+                    <span class="label">Contact:</span> Hannah Clark<br>
+                    <span class="label">Phone:</span> +64 3 365 8282
+                </p>
+            </div>
+        </div>
+
+        <div class="items-section">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 50%;">Description</th>
+                        <th class="text-center" style="width: 15%;">Quantity</th>
+                        <th class="text-right" style="width: 17.5%;">Unit Price (SGD)</th>
+                        <th class="text-right" style="width: 17.5%;">Total (SGD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                                        <tr>
+                        <td>Docking Station</td>
+                        <td class="text-center">2</td>
+                        <td class="text-right">100.00</td>
+                        <td class="text-right">200.00</td>
+                    </tr>
+                    <tr>
+                        <td>Whiteboard</td>
+                        <td class="text-center">1</td>
+                        <td class="text-right">10.00</td>
+                        <td class="text-right">10.00</td>
+                    </tr>
+                    <tr>
+                        <td>Projector</td>
+                        <td class="text-center">2</td>
+                        <td class="text-right">500.00</td>
+                        <td class="text-right">1,000.00</td>
+                    </tr>
+                    <tr>
+                        <td>Stapler</td>
+                        <td class="text-center">1</td>
+                        <td class="text-right">3.00</td>
+                        <td class="text-right">3.00</td>
+                    </tr>
+                    <tr>
+                        <td>Marker</td>
+                        <td class="text-center">5</td>
+                        <td class="text-right">1.00</td>
+                        <td class="text-right">5.00</td>
+                    </tr>
+                    <tr>
+                        <td>Bookshelf</td>
+                        <td class="text-center">1</td>
+                        <td class="text-right">4,200.00</td>
+                        <td class="text-right">4,200.00</td>
+                    </tr>
+                    <tr>
+                        <td>Headset</td>
+                        <td class="text-center">2</td>
+                        <td class="text-right">120.00</td>
+                        <td class="text-right">240.00</td>
+                    </tr>
+                    <tr>
+                        <td>Keyboard</td>
+                        <td class="text-center">1</td>
+                        <td class="text-right">30.00</td>
+                        <td class="text-right">30.00</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="totals">
+            <div class="totals-box">
+                <div class="totals-row subtotal">
+                    <span class="label">Subtotal:</span>
+                    <span class="value">5,688.00 SGD</span>
+                </div>
+                <div class="totals-row tax">
+                    <span class="label">GST 8%:</span>
+                    <span class="value">455.04 SGD</span>
+                </div>
+                <div class="totals-row total">
+                    <span class="label">Total:</span>
+                    <span class="value">6,143.04 SGD</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="notes-section">
+            <h4>Notes</h4>
+            <p>Please confirm receipt and delivery date.. Payment subject to goods receipt by buyer.</p>
+        </div>
+
+        <div class="footer">
+            <p>Snapshot generated on <b>February 23, 2026</b> • This is an electronically generated document</p>
+        </div>
+    </div>
+</body>
+</html>

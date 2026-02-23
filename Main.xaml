@@ -124,6 +124,10 @@
       <x:String>UiPath.DataService.Definition</x:String>
       <x:String>UiPath.DataService.Activities.Models</x:String>
       <x:String>RetrieveInvoiceDocument</x:String>
+      <x:String>System.CodeDom</x:String>
+      <x:String>Microsoft.CSharp</x:String>
+      <x:String>Microsoft.CodeAnalysis.VisualBasic</x:String>
+      <x:String>Microsoft.CodeAnalysis.VisualBasic.Syntax</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -236,9 +240,12 @@
       <AssemblyReference>UiPath.DataService.Definition</AssemblyReference>
       <AssemblyReference>DataService.RetrieveInvoiceDocument</AssemblyReference>
       <AssemblyReference>RetrieveInvoiceDocument.Core</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>System.Reflection.MetadataLoadContext</AssemblyReference>
+      <AssemblyReference>Microsoft.CodeAnalysis.VisualBasic</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main" sap:VirtualizedContainerService.HintSize="1455,861.6566666666666" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main" sap:VirtualizedContainerService.HintSize="2311,864.6566666666666" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="InvoiceFileName" />
       <Variable x:TypeArguments="x:String" Name="POID" />
@@ -246,6 +253,8 @@
       <Variable x:TypeArguments="x:Int32" Name="po_lines_count" />
       <Variable x:TypeArguments="upr:IResource" Name="InvoiceFileResource" />
       <Variable x:TypeArguments="x:String" Name="PODATA" />
+      <Variable x:TypeArguments="r:PurchaseOrdersDatabase" Name="DF_Record" />
+      <Variable x:TypeArguments="upr:IResource" Name="POFileResource" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -315,7 +324,14 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ReadTextFile>
-    <uda:CreateEntityRecord x:TypeArguments="r:PurchaseOrdersDatabase" InputEntity="{x:Null}" IsInRecordView="{x:Null}" OutputEntity="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Create Entity Record" EntityId="47003d67-3e0d-f111-832f-0022489d7f69" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="CreateEntityRecord`1_1" InputEntityInFieldView="[new RetrieveInvoiceDocument.PurchaseOrdersDatabase() With {  .PODATA = PODATA,  .POID = &quot;PO-&quot;+POID }]" TimeoutInMs="30000">
+    <ui:RenameFileX FileResource="{x:Null}" DisplayName="Rename File" FilePath="purchase_order-generated.html" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="RenameFileX_2" KeepExtension="True" NewName="[&quot;PO-&quot;+ POID + &quot;.html&quot;]" OutputFileResource="[POFileResource]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:RenameFileX>
+    <uda:CreateEntityRecord x:TypeArguments="r:PurchaseOrdersDatabase" InputEntity="{x:Null}" VisibleDynamicPropertiesInfo="{x:Null}" ContinueOnError="False" DisplayName="Create Entity Record" EntityId="47003d67-3e0d-f111-832f-0022489d7f69" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="CreateEntityRecord`1_1" InputEntityInFieldView="[new RetrieveInvoiceDocument.PurchaseOrdersDatabase() With {  .PODATA = PODATA,  .POID = &quot;PO-&quot;+POID }]" IsInRecordView="False" OutputEntity="[DF_Record]" TimeoutInMs="30000">
       <uda:CreateEntityRecord.State>
         <udam:RecordState RequiredFieldCount="2">
           <udam:RecordState.SelectedFields>
@@ -340,6 +356,13 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </uda:CreateEntityRecord>
+    <uda:UploadFileToRecordField x:TypeArguments="r:PurchaseOrdersDatabase" InputEntity="{x:Null}" OutputEntity="{x:Null}" ContinueOnError="False" DisplayName="Upload the file named &quot;PO.html&quot; to the &quot;POHTML&quot; file field of the Data Service entity." EntityId="47003d67-3e0d-f111-832f-0022489d7f69" ExpansionDepth="2" Field="POHTML" FilePath="PO.html" FileResource="[POFileResource]" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="UploadFileToRecordField`1_2" RecordId="[DF_Record.Id]" TimeoutInMs="30000">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </uda:UploadFileToRecordField>
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="PDFWriter - Invoke Workflow File (PDFWriter.cs)" sap:VirtualizedContainerService.HintSize="450,48" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="PDFWriter.cs">
       <ui:InvokeWorkflowFile.Arguments>
         <scg:Dictionary x:TypeArguments="x:String, Argument" />
