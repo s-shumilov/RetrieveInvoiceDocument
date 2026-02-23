@@ -599,341 +599,77 @@ namespace RetrieveInvoiceDocument
                 decimal total = (decimal)poJson["total"];
                 string notes = poJson["notes"]?.ToString() ?? "";
 
-                // Generate line items HTML
+                // Generate line items HTML (inline styles; alternate row backgrounds)
                 var lineItemsHtml = "";
-                foreach (var item in items)
+                for (int i = 0; i < items.Count; i++)
                 {
+                    var item = items[i];
                     var desc = item["description"].ToString();
                     var qty = item["quantity"];
                     var unitPrice = item["unitPrice"];
                     var lineTotal = item["lineTotal"];
-                    
-                    lineItemsHtml += $@"                    <tr>
-                        <td>{desc}</td>
-                        <td class=""text-center"">{qty}</td>
-                        <td class=""text-right"">{unitPrice:N2}</td>
-                        <td class=""text-right"">{lineTotal:N2}</td>
+                    var rowBg = (i % 2 == 1) ? "background-color:#f8f9fa;" : "";
+
+                    lineItemsHtml += $@"                    <tr style=""{rowBg}"">
+                        <td style=""padding:15px;border-bottom:1px solid #ecf0f1;font-size:14px;"">{desc}</td>
+                        <td style=""padding:15px;border-bottom:1px solid #ecf0f1;font-size:14px;text-align:center;"">{qty}</td>
+                        <td style=""padding:15px;border-bottom:1px solid #ecf0f1;font-size:14px;text-align:right;"">{unitPrice:N2}</td>
+                        <td style=""padding:15px;border-bottom:1px solid #ecf0f1;font-size:14px;text-align:right;"">{lineTotal:N2}</td>
                     </tr>
 ";
                 }
 
-                // Build HTML document
-                string html = $@"<!DOCTYPE html>
-<html lang=""en"">
-<head>
-    <meta charset=""UTF-8"">
-    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
-    <title>Purchase Order {poNumber}</title>
-    <style>
-        * {{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }}
-
-        body {{
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
-            background-color: #f5f5f5;
-            padding: 20px;
-        }}
-
-        .container {{
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 40px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 4px;
-        }}
-
-        .header {{
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 40px;
-            border-bottom: 3px solid #2c3e50;
-            padding-bottom: 20px;
-        }}
-
-        .header-title h1 {{
-            font-size: 32px;
-            color: #2c3e50;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }}
-
-        .header-title p {{
-            font-size: 14px;
-            color: #7f8c8d;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }}
-
-        .po-info {{
-            text-align: right;
-        }}
-
-        .po-info div {{
-            margin-bottom: 10px;
-            font-size: 14px;
-        }}
-
-        .po-info .label {{
-            color: #7f8c8d;
-            font-weight: 500;
-        }}
-
-        .po-info .value {{
-            color: #2c3e50;
-            font-weight: 600;
-            font-size: 16px;
-        }}
-
-        .addresses {{
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }}
-
-        .address-block {{
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-left: 4px solid #3498db;
-            border-radius: 4px;
-        }}
-
-        .address-block h3 {{
-            font-size: 12px;
-            text-transform: uppercase;
-            color: #7f8c8d;
-            font-weight: 600;
-            margin-bottom: 12px;
-            letter-spacing: 1px;
-        }}
-
-        .address-block p {{
-            font-size: 14px;
-            margin-bottom: 8px;
-            line-height: 1.6;
-        }}
-
-        .address-block .label {{
-            color: #7f8c8d;
-            font-size: 12px;
-            font-weight: 500;
-        }}
-
-        .items-section {{
-            margin-bottom: 30px;
-        }}
-
-        table {{
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }}
-
-        thead {{
-            background-color: #2c3e50;
-            color: white;
-        }}
-
-        thead th {{
-            padding: 15px;
-            text-align: left;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 600;
-        }}
-
-        tbody td {{
-            padding: 15px;
-            border-bottom: 1px solid #ecf0f1;
-            font-size: 14px;
-        }}
-
-        tbody tr:last-child td {{
-            border-bottom: 2px solid #2c3e50;
-        }}
-
-        tbody tr:nth-child(even) {{
-            background-color: #f8f9fa;
-        }}
-
-        .text-right {{
-            text-align: right;
-        }}
-
-        .text-center {{
-            text-align: center;
-        }}
-
-        .totals {{
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 30px;
-        }}
-
-        .totals-box {{
-            width: 300px;
-            background-color: #f8f9fa;
-            border: 1px solid #ecf0f1;
-            border-radius: 4px;
-            padding: 0;
-        }}
-
-        .totals-row {{
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 20px;
-            border-bottom: 1px solid #ecf0f1;
-            font-size: 14px;
-        }}
-
-        .totals-row:last-child {{
-            border-bottom: none;
-        }}
-
-        .totals-row.subtotal .label {{
-            color: #7f8c8d;
-        }}
-
-        .totals-row.tax {{
-            background-color: #fff3cd;
-        }}
-
-        .totals-row.tax .label {{
-            color: #856404;
-            font-weight: 500;
-        }}
-
-        .totals-row.total {{
-            background-color: #2c3e50;
-            color: white;
-            font-weight: 600;
-            font-size: 16px;
-        }}
-
-        .totals-row .label {{
-            color: #333;
-            font-weight: 500;
-        }}
-
-        .totals-row .value {{
-            font-weight: 600;
-            color: #2c3e50;
-        }}
-
-        .totals-row.total .value {{
-            color: white;
-        }}
-
-        .notes-section {{
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #ecf0f1;
-        }}
-
-        .notes-section h4 {{
-            font-size: 12px;
-            text-transform: uppercase;
-            color: #7f8c8d;
-            font-weight: 600;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-        }}
-
-        .notes-section p {{
-            font-size: 14px;
-            color: #333;
-            line-height: 1.6;
-            background-color: #f8f9fa;
-            padding: 12px;
-            border-left: 4px solid #3498db;
-            border-radius: 4px;
-        }}
-
-        .footer {{
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #ecf0f1;
-            text-align: center;
-            color: #7f8c8d;
-            font-size: 12px;
-        }}
-
-        @media print {{
-            body {{
-                background-color: white;
-                padding: 0;
-            }}
-
-            .container {{
-                box-shadow: none;
-                max-width: 100%;
-                padding: 0;
-            }}
-        }}
-    </style>
-</head>
-<body>
-    <div class=""container"">
-        <div class=""header"">
-            <div class=""header-title"">
-                <h1>Purchase Order</h1>
-                <p>Original Document</p>
+                // Build HTML document using inline styles and no class-based CSS
+                string html = $@"
+<body style=""font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;color:#333;background-color:#f5f5f5;padding:20px;"">
+    <div style=""max-width:900px;margin:0 auto;background-color:white;padding:40px;box-shadow:0 0 10px rgba(0,0,0,0.1);border-radius:4px;"">
+        <div style=""display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:40px;border-bottom:3px solid #2c3e50;padding-bottom:20px;"">
+            <div>
+                <h1 style=""font-size:32px;color:#2c3e50;font-weight:600;margin-bottom:5px;"">Purchase Order</h1>
+                <p style=""font-size:14px;color:#7f8c8d;text-transform:uppercase;letter-spacing:1px;"">Original Document</p>
             </div>
-            <div class=""po-info"">
-                <div>
-                    <span class=""label"">Purchase Order Number:</span>
-                    <div class=""value"">{poNumber}</div>
+            <div style=""text-align:right;"">
+                <div style=""margin-bottom:10px;font-size:14px;"">
+                    <span style=""color:#7f8c8d;font-weight:500;"">Purchase Order Number:</span>
+                    <div style=""color:#2c3e50;font-weight:600;font-size:16px;"">{poNumber}</div>
                 </div>
-                <div>
-                    <span class=""label"">Purchase Order Date:</span>
-                    <div class=""value"">{DateTime.Parse(poDate):MMMM dd, yyyy}</div>
+                <div style=""margin-bottom:10px;font-size:14px;"">
+                    <span style=""color:#7f8c8d;font-weight:500;"">Purchase Order Date:</span>
+                    <div style=""color:#2c3e50;font-weight:600;font-size:16px;"">{DateTime.Parse(poDate):MMMM dd, yyyy}</div>
                 </div>
             </div>
         </div>
 
-        <div class=""addresses"">
-            <div class=""address-block"">
-                <h3>From</h3>
-                <p><strong>{seller["name"]}</strong></p>
-                <p>{seller["address"]} {seller["country"]}</p>
-                <p style=""margin-top: 12px;"">
-                    <span class=""label"">Tax Code:</span> {seller["taxCode"]}
-                </p>
-                <p style=""margin-top: 6px;"">
-                    <span class=""label"">Attention:</span> {seller["ContactName"]}<br>
-                    <span class=""label"">Phone:</span> {seller["ContactPhone"]}
+        <div style=""display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:40px;"">
+            <div style=""padding:20px;background-color:#f8f9fa;border-left:4px solid #3498db;border-radius:4px;"">
+                <h3 style=""font-size:12px;text-transform:uppercase;color:#7f8c8d;font-weight:600;margin-bottom:12px;letter-spacing:1px;"">From</h3>
+                <p style=""font-size:14px;margin-bottom:8px;line-height:1.6;""><strong>{seller["name"]}</strong></p>
+                <p style=""font-size:14px;margin-bottom:8px;line-height:1.6;"">{seller["address"]} {seller["country"]}</p>
+                <p style=""margin-top:12px;font-size:14px;""><span style=""color:#7f8c8d;font-size:12px;font-weight:500;"">Tax Code:</span> {seller["taxCode"]}</p>
+                <p style=""margin-top:6px;font-size:14px;""><span style=""color:#7f8c8d;font-size:12px;font-weight:500;"">Attention:</span> {seller["ContactName"]}<br>
+                    <span style=""color:#7f8c8d;font-size:12px;font-weight:500;"">Phone:</span> {seller["ContactPhone"]}
                 </p>
             </div>
-            <div class=""address-block"">
-                <h3>To (Buyer)</h3>
-                <p><strong>{buyer["name"]}</strong></p>
-                <p>{buyer["address"]}</p>
-                <p>{buyer["country"]}</p>
-                <p style=""margin-top: 12px;"">
-                    <span class=""label"">Tax Code:</span> {buyer["taxCode"]}
-                </p>
-                <p style=""margin-top: 6px;"">
-                    <span class=""label"">Contact:</span> {buyer["ContactName"]}<br>
-                    <span class=""label"">Phone:</span> {buyer["ContactPhone"]}
+            <div style=""padding:20px;background-color:#f8f9fa;border-left:4px solid #3498db;border-radius:4px;"">
+                <h3 style=""font-size:12px;text-transform:uppercase;color:#7f8c8d;font-weight:600;margin-bottom:12px;letter-spacing:1px;"">To (Buyer)</h3>
+                <p style=""font-size:14px;margin-bottom:8px;line-height:1.6;""><strong>{buyer["name"]}</strong></p>
+                <p style=""font-size:14px;margin-bottom:8px;line-height:1.6;"">{buyer["address"]}</p>
+                <p style=""font-size:14px;margin-bottom:8px;line-height:1.6;"">{buyer["country"]}</p>
+                <p style=""margin-top:12px;font-size:14px;""><span style=""color:#7f8c8d;font-size:12px;font-weight:500;"">Tax Code:</span> {buyer["taxCode"]}</p>
+                <p style=""margin-top:6px;font-size:14px;""><span style=""color:#7f8c8d;font-size:12px;font-weight:500;"">Contact:</span> {buyer["ContactName"]}<br>
+                    <span style=""color:#7f8c8d;font-size:12px;font-weight:500;"">Phone:</span> {buyer["ContactPhone"]}
                 </p>
             </div>
         </div>
 
-        <div class=""items-section"">
-            <table>
+        <div style=""margin-bottom:30px;"">
+            <table style=""width:100%;border-collapse:collapse;margin-bottom:20px;"">
                 <thead>
                     <tr>
-                        <th style=""width: 50%;"">Description</th>
-                        <th class=""text-center"" style=""width: 15%;"">Quantity</th>
-                        <th class=""text-right"" style=""width: 17.5%;"">Unit Price ({currency})</th>
-                        <th class=""text-right"" style=""width: 17.5%;"">Total ({currency})</th>
+                        <th style=""padding:15px;text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;background-color:#2c3e50;color:white;width:50%;"">Description</th>
+                        <th style=""padding:15px;text-align:center;font-size:12px;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;background-color:#2c3e50;color:white;width:15%;"">Quantity</th>
+                        <th style=""padding:15px;text-align:right;font-size:12px;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;background-color:#2c3e50;color:white;width:17.5%;"">Unit Price ({currency})</th>
+                        <th style=""padding:15px;text-align:right;font-size:12px;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;background-color:#2c3e50;color:white;width:17.5%;"">Total ({currency})</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -942,34 +678,32 @@ namespace RetrieveInvoiceDocument
             </table>
         </div>
 
-        <div class=""totals"">
-            <div class=""totals-box"">
-                <div class=""totals-row subtotal"">
-                    <span class=""label"">Subtotal:</span>
-                    <span class=""value"">{subtotal:N2} {currency}</span>
+        <div style=""display:flex;justify-content:flex-end;margin-bottom:30px;"">
+            <div style=""width:300px;background-color:#f8f9fa;border:1px solid #ecf0f1;border-radius:4px;padding:0;"">
+                <div style=""display:flex;justify-content:space-between;padding:12px 20px;border-bottom:1px solid #ecf0f1;font-size:14px;"">
+                    <span style=""color:#7f8c8d;font-weight:500;"">Subtotal:</span>
+                    <span style=""font-weight:600;color:#2c3e50;"">{subtotal:N2} {currency}</span>
                 </div>
-                <div class=""totals-row tax"">
-                    <span class=""label"">{taxName}:</span>
-                    <span class=""value"">{taxTotal:N2} {currency}</span>
+                <div style=""display:flex;justify-content:space-between;padding:12px 20px;border-bottom:1px solid #ecf0f1;font-size:14px;background-color:#fff3cd;"">
+                    <span style=""color:#856404;font-weight:500;"">{taxName}:</span>
+                    <span style=""font-weight:600;color:#2c3e50;"">{taxTotal:N2} {currency}</span>
                 </div>
-                <div class=""totals-row total"">
-                    <span class=""label"">Total:</span>
-                    <span class=""value"">{total:N2} {currency}</span>
+                <div style=""display:flex;justify-content:space-between;padding:12px 20px;font-size:16px;background-color:#2c3e50;color:white;font-weight:600;"">
+                    <span style=""color:white;"">Total:</span>
+                    <span style=""color:white;font-weight:600;"">{total:N2} {currency}</span>
                 </div>
             </div>
         </div>
 
-        {(string.IsNullOrEmpty(notes.Trim()) ? "" : $@"<div class=""notes-section"">
-            <h4>Notes</h4>
-            <p>{notes}. Payment subject to goods receipt by buyer.</p>
+        {(string.IsNullOrEmpty(notes.Trim()) ? "" : $@"<div style=""margin-top:30px;padding-top:20px;border-top:1px solid #ecf0f1;"">
+            <h4 style=""font-size:12px;text-transform:uppercase;color:#7f8c8d;font-weight:600;margin-bottom:10px;letter-spacing:1px;"">Notes</h4>
+            <p style=""font-size:14px;color:#333;line-height:1.6;background-color:#f8f9fa;padding:12px;border-left:4px solid #3498db;border-radius:4px;"">{notes} Payment subject to goods receipt by buyer.</p>
         </div>")}
 
-        <div class=""footer"">
+        <div style=""margin-top:40px;padding-top:20px;border-top:1px solid #ecf0f1;text-align:center;color:#7f8c8d;font-size:12px;"">
             <p>Snapshot generated on <b>{DateTime.Now:MMMM dd, yyyy}</b> • This is an electronically generated document</p>
         </div>
-    </div>
-</body>
-</html>";
+    </div>";
 
                 // Save HTML file
                 string htmlFileName = "purchase_order-generated.html";
