@@ -11,7 +11,9 @@
           "in_FailureProbability": {
             "type": "integer",
             "minimum": -2147483648,
-            "maximum": 2147483647
+            "maximum": 2147483647,
+            "x-default-expression": "70",
+            "default": 70
           }
         },
         "required": []
@@ -40,11 +42,11 @@
               },
               "MimeType": {
                 "type": "string",
-                "description": "The MIME type of the content, such as \u0022application/json\u0022 or \u0022image/png"
+                "description": "The MIME type of the content, such as \"application/json\" or \"image/png"
               },
               "Metadata": {
                 "type": "object",
-                "description": "Dictionary\u003Cstring, string\u003E of metadata",
+                "description": "Dictionary<string, string> of metadata",
                 "additionalProperties": {
                   "type": "string"
                 }

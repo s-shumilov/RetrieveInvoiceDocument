@@ -1,76 +1,76 @@
 {
-  "PONumber": "PO-11022838",
-  "PODate": "2026-02-20",
-  "currency": "SGD",
+  "PONumber": "PO-15050878",
+  "PODate": "2026-05-23",
+  "currency": "RON",
   "seller": {
-    "name": "Straits Digital Pte Ltd",
-    "address": "6 Battery Rd, #18-01, Singapore 049909",
-    "country": "Singapore",
-    "taxCode": "SG-202334455K",
-    "ContactName": "Marcus Lee",
-    "ContactPhone": "+65 8344 3944"
+    "name": "Banat IT Services SRL",
+    "address": "Bd. Republicii 18, Timisoara 300030",
+    "country": "Romania",
+    "taxCode": "RO-55664433",
+    "ContactName": "Cristina Pavel",
+    "ContactPhone": "+40 727 855 959"
   },
   "buyer": {
-    "name": "Southern Data Ltd",
-    "address": "45 Cashel St, Christchurch 8011",
-    "country": "New Zealand",
-    "taxCode": "NZ-9429035566778",
-    "ContactName": "Hannah Clark",
-    "ContactPhone": "+64 3 365 8282"
+    "name": "Coral Coast Digital Pty Ltd",
+    "address": "45 St Georges Terrace, Perth WA 6000",
+    "country": "Australia",
+    "taxCode": "AU-88442211990",
+    "ContactName": "Noah Campbell",
+    "ContactPhone": "+61 8 6222 6652"
   },
   "items": [
     {
-      "description": "Docking Station",
-      "quantity": 2,
-      "unitPrice": 100.0,
-      "lineTotal": 200.0
-    },
-    {
       "description": "Whiteboard",
-      "quantity": 1,
-      "unitPrice": 10.0,
-      "lineTotal": 10.0
-    },
-    {
-      "description": "Projector",
       "quantity": 2,
-      "unitPrice": 500.0,
-      "lineTotal": 1000.0
+      "unitPrice": 10.0,
+      "lineTotal": 20.0
     },
     {
-      "description": "Stapler",
+      "description": "Tape Dispenser",
       "quantity": 1,
       "unitPrice": 3.0,
       "lineTotal": 3.0
     },
     {
-      "description": "Marker",
-      "quantity": 5,
-      "unitPrice": 1.0,
-      "lineTotal": 5.0
-    },
-    {
-      "description": "Bookshelf",
+      "description": "Office Couch",
       "quantity": 1,
-      "unitPrice": 4200.0,
-      "lineTotal": 4200.0
+      "unitPrice": 2400.0,
+      "lineTotal": 2400.0
     },
     {
-      "description": "Headset",
+      "description": "Printer Paper Large",
+      "quantity": 20,
+      "unitPrice": 4.0,
+      "lineTotal": 80.0
+    },
+    {
+      "description": "Standing Desk",
+      "quantity": 1,
+      "unitPrice": 850.0,
+      "lineTotal": 850.0
+    },
+    {
+      "description": "Label Maker",
       "quantity": 2,
-      "unitPrice": 120.0,
-      "lineTotal": 240.0
+      "unitPrice": 6.0,
+      "lineTotal": 12.0
     },
     {
-      "description": "Keyboard",
-      "quantity": 1,
-      "unitPrice": 30.0,
-      "lineTotal": 30.0
+      "description": "Wireless Charger",
+      "quantity": 2,
+      "unitPrice": 20.0,
+      "lineTotal": 40.0
+    },
+    {
+      "description": "Sticky Notes",
+      "quantity": 10,
+      "unitPrice": 1.0,
+      "lineTotal": 10.0
     }
   ],
-  "subtotal": 5688.0,
-  "taxTotal": 455.04,
-  "taxName": "GST 8%",
-  "total": 6143.04,
+  "subtotal": 3415.0,
+  "taxTotal": 648.85,
+  "taxName": "VAT 19%",
+  "total": 4063.85,
   "notes": "Please confirm receipt and delivery date."
 }

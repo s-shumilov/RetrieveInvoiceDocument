@@ -1,78 +1,78 @@
 {
-  "invoiceNumber": "INV-15114385",
-  "PONumber": "PO-11024384",
-  "invoiceDate": "2026-02-15",
-  "dueDate": "2026-03-17",
+  "invoiceNumber": "INV-22150825",
+  "PONumber": "PO-15050878",
+  "invoiceDate": "2026-05-22",
+  "dueDate": "2026-06-21",
   "currency": "RON",
   "seller": {
-    "name": "Dacia Networks SRL",
-    "address": "Str. Libertatii 5, Brasov",
+    "name": "Banat IT Services SRL",
+    "address": "Bd. Republicii 18, Timisoara 300030",
     "country": "Romania",
-    "taxCode": "RO-77889900",
-    "ContactName": "Florin Petrescu",
-    "ContactPhone": "+40-31-444-1122"
+    "taxCode": "RO-55664433",
+    "ContactName": "Cristina Pavel",
+    "ContactPhone": "+40 727 855 959"
   },
   "buyer": {
-    "name": "Marina Bay Solutions Pte Ltd",
-    "address": "1 Raffles Place, #22-01, Singapore",
-    "country": "Singapore",
-    "taxCode": "SG-201998877X",
-    "ContactName": "Cheryl Lim",
-    "ContactPhone": "+65-6789-1122"
+    "name": "Coral Coast Digital Pty Ltd",
+    "address": "45 St Georges Terrace, Perth WA 6000",
+    "country": "Australia",
+    "taxCode": "AU-88442211990",
+    "ContactName": "Noah Campbell",
+    "ContactPhone": "+61 8 6222 6652"
   },
   "items": [
     {
-      "description": "Computer Desk",
-      "quantity": 1,
-      "unitPrice": 150.0,
-      "lineTotal": 150.0
+      "description": "White Board",
+      "quantity": 2,
+      "unitPrice": 10.0,
+      "lineTotal": 20.0
     },
     {
-      "description": "Wooden Conference Table",
-      "quantity": 1,
-      "unitPrice": 12400.0,
-      "lineTotal": 12400.0
-    },
-    {
-      "description": "Mouse Pad",
-      "quantity": 1,
-      "unitPrice": 5.0,
-      "lineTotal": 5.0
-    },
-    {
-      "description": "Office Air Purifier",
-      "quantity": 1,
-      "unitPrice": 350.0,
-      "lineTotal": 350.0
-    },
-    {
-      "description": "Heavy-duty Stapler",
+      "description": "Tape Dispenser",
       "quantity": 1,
       "unitPrice": 3.0,
       "lineTotal": 3.0
     },
     {
-      "description": "Waterproof Marker",
-      "quantity": 5,
-      "unitPrice": 1.0,
-      "lineTotal": 5.0
+      "description": "Office Coach",
+      "quantity": 1,
+      "unitPrice": 2400.0,
+      "lineTotal": 2400.0
     },
     {
-      "description": "USB-C Docking Station",
-      "quantity": 1,
-      "unitPrice": 120.00,
-      "lineTotal": 120.00
-    },
-    {
-      "description": "Paper A5",
-      "quantity": 1,
+      "description": "Paper A4",
+      "quantity": 20,
       "unitPrice": 4.0,
-      "lineTotal": 4.0
+      "lineTotal": 80.0
+    },
+    {
+      "description": "Electric Standing Desk",
+      "quantity": 1,
+      "unitPrice": 850.0,
+      "lineTotal": 850.0
+    },
+    {
+      "description": "Labelmaker",
+      "quantity": 2,
+      "unitPrice": 6.0,
+      "lineTotal": 12.0
+    },
+    {
+      "description": "Wireless Charger",
+      "quantity": 2,
+      "unitPrice": 20.0,
+      "lineTotal": 40.0
+    },
+    {
+      "description": "Notes",
+      "quantity": 10,
+      "unitPrice": 1.0,
+      "lineTotal": 10.0
     }
   ],
-  "subtotal": 13037.00,
-  "taxTotal": 2477.03,
+  "subtotal": 3415.0,
+  "taxTotal": 648.85,
   "taxName": "VAT 19%",
-  "total": 15514.03,
+  "total": 4063.85,
   "notes": "Payment due within 30 days. Thank you for your business."
 }
